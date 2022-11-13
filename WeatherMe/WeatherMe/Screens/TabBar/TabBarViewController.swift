@@ -19,14 +19,14 @@ final class TabBarViewController: UITabBarController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
-        navigationItem.largeTitleDisplayMode = .automatic
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     // Create all of the tabs and icons of the tabs
     func setupViewControllers(){
         viewControllers = [
             createNavigationController(for: MainViewController(),
-                                       title: NSLocalizedString("Home", comment: ""),
+                                       title: NSLocalizedString("", comment: ""),
                                        image: UIImage(systemName:"sun.max")!)
             
         ]

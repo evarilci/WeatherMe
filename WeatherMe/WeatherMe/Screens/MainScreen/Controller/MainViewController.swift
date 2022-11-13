@@ -14,6 +14,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         mainView.degree = 127
+        navigationItem.largeTitleDisplayMode = .never
         //view.backgroundColor = .red
     }
 }

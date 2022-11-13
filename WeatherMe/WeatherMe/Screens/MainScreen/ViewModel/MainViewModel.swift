@@ -36,7 +36,6 @@ final class MainViewModel: MainViewModelProtocol {
                     self?.forecasts = forecast
                     self?.delegate?.fetchSucceed()
                 } catch  {
-                    print ("ERROR IS HERE!!! \(error)")
                 }
                 
                 self!.delegate?.fetchSucceed()

@@ -8,23 +8,23 @@
 import Foundation
 
 
-struct WeatherResponse: Decodable {
+struct WeatherResponse: Codable {
     let success: Bool
     let city: String
     let result: [Result]
 }
 
 // MARK: - Result
-struct Result: Decodable {
+struct Result: Codable {
     let date: String
     let day: String
     let icon: String
-    let resultDescription: String
+    let description: String
     let status: String
     let degree: String
     let min: String
     let max: String
     let night: String
     let humidity: String
-
 }
+

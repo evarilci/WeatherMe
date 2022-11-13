@@ -15,9 +15,9 @@ final class MainView: UIView {
         }
     }
     
-    var degree: String? {
+    var degree: Double? {
         didSet {
-            degreeLabel.text = degree
+            degreeLabel.text = NSString(format: "\(degree!.formatted())%@" as NSString, "\u{00B0}") as String
         }
     }
     
@@ -32,7 +32,7 @@ final class MainView: UIView {
             label.text = "ANKARA"
             label.numberOfLines = 0
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        label.font = UIFont.systemFont(ofSize: 50, weight: .light)
             label.sizeToFit()
             label.textColor = UIColor.systemTeal
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,14 +41,22 @@ final class MainView: UIView {
     
     private let degreeLabel: UILabel = {
         let label = UILabel()
-        label.text = "27"
+//        label.text = NSString(format: "23%@", "\u{00B0}") as String
+        label.text = "25°"
         label.numberOfLines = 0
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 40, weight: .light)
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 60, weight: .ultraLight)
         label.sizeToFit()
         label.textColor = UIColor.systemTeal
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let iconView: UIImageView = {
+        let imageview = UIImageView()
+        imageview.image = UIImage(systemName: "cloud.fill")
+        imageview.translatesAutoresizingMaskIntoConstraints = false
+        return imageview
     }()
         
         private let descriptionLabel: UILabel = {
@@ -57,7 +65,7 @@ final class MainView: UIView {
             label.numberOfLines = 0
             label.sizeToFit()
             label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 15, weight: .light)
+            label.font = UIFont.systemFont(ofSize: 25, weight: .ultraLight)
            // label.textColor = UIColor.systemRed
             label.translatesAutoresizingMaskIntoConstraints = false
             return label
@@ -94,28 +102,28 @@ final class MainView: UIView {
     
     func setupViews(){
         
-            
-            
-        
             contentView.addSubview(cityTitleLabel)
                 cityTitleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
                 cityTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-                cityTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
-                cityTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        
+                cityTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+              
         contentView.addSubview(degreeLabel)
-            degreeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            degreeLabel.topAnchor.constraint(equalTo: cityTitleLabel.bottomAnchor, constant: 16).isActive = true
-            degreeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
-            degreeLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            degreeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24).isActive = true
+            degreeLabel.topAnchor.constraint(equalTo: cityTitleLabel.bottomAnchor, constant: 24).isActive = true
+            degreeLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        contentView.addSubview(iconView)
+        iconView.topAnchor.constraint(equalTo: degreeLabel.topAnchor).isActive = true
+        iconView.leadingAnchor.constraint(equalTo: degreeLabel.trailingAnchor, constant: 16).isActive = true
+        iconView.heightAnchor.constraint(equalTo: degreeLabel.heightAnchor, multiplier: 1/2).isActive = true
+        iconView.widthAnchor.constraint(equalTo: iconView.heightAnchor).isActive = true
+            
     
             
             contentView.addSubview(descriptionLabel)
-                descriptionLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-                descriptionLabel.topAnchor.constraint(equalTo: degreeLabel.bottomAnchor, constant: 16).isActive = true
-                descriptionLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
-                descriptionLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-               // descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+                descriptionLabel.topAnchor.constraint(equalTo: iconView.bottomAnchor, constant: 10).isActive = true
+                //descriptionLabel.bottomAnchor.constraint(equalTo: degreeLabel.bottomAnchor).isActive = true
+                descriptionLabel.leadingAnchor.constraint(equalTo: degreeLabel.trailingAnchor, constant: 16).isActive = true
         }
 
 

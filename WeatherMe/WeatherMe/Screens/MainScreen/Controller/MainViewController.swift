@@ -13,6 +13,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
+        mainView.degree = 127
         //view.backgroundColor = .red
     }
 }

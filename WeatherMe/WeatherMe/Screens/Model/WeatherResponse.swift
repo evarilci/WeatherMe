@@ -9,22 +9,32 @@ import Foundation
 
 
 struct WeatherResponse: Codable {
-    let success: Bool
-    let city: String
-    let result: [Result]
+    let success: Bool?
+    let city: String?
+    let result: [Result]?
 }
 
 // MARK: - Result
 struct Result: Codable {
-    let date: String
-    let day: String
-    let icon: String
-    let description: String
-    let status: String
-    let degree: String
-    let min: String
-    let max: String
-    let night: String
-    let humidity: String
+    let date: String?
+    let day: String?
+    let icon: String?
+    let description: String?
+    let status: String?
+    let degree: String?
+    let min: String?
+    let max: String?
+    let night: String?
+    let humidity: String?
+}
+
+extension Result {
+    var degreeDouble: Double {
+        guard let degree = degree,
+              let double = Double(degree) else {
+                return 0.0
+        }
+        return double
+    }
 }
 

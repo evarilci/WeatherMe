@@ -36,5 +36,44 @@ extension Result {
         }
         return double
     }
+    
+    var minDouble: Double {
+        guard let degree = min,
+              let double = Double(degree) else {
+                return 0.0
+        }
+        return double
+    }
+    
+    var maxDouble: Double {
+        guard let degree = max,
+              let double = Double(degree) else {
+                return 0.0
+        }
+        return double
+    }
+    
+    var nightDouble: Double {
+        guard let degree = night,
+              let double = Double(degree) else {
+                return 0.0
+        }
+        return double
+    }
+    
 }
+
+
+extension Result {
+    var iconURL: URL {
+        guard let icon = icon,
+              let iconURL = URL(string: icon) else {
+                let image = "https://www.computerhope.com/jargon/b/black.jpg",
+                    iconUrl = URL(string: image)
+                return iconUrl!
+            }
+            return iconURL
+        }
+        
+    }
 

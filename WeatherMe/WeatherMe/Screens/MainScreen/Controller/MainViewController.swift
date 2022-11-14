@@ -6,15 +6,40 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MainViewController: UIViewController {
 
     let mainView = MainView()
+    let viewModel = MainViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         view = mainView
-        mainView.degree = 127
+        viewModel.fetchWeather("istanbul", "tr")
         navigationItem.largeTitleDisplayMode = .never
-        //view.backgroundColor = .red
+        fetchSucceed()
     }
+}
+
+extension MainViewController: MainViewModelDelegate {
+    func fetchSucceed() {
+        mainView.city = viewModel.city
+        mainView.degree = viewModel.degree
+        guard let icon = URL(string: viewModel.image) else {return}
+        mainView.iconView.kf.setImage(with: icon)
+        mainView.min = viewModel.min
+        mainView.max = viewModel.max
+        mainView.night = viewModel.night
+        mainView.humidity = viewModel.humidity
+        mainView.descript = viewModel.description
+        mainView.date = viewModel.date
+        mainView.day = viewModel.day
+    }
+    
+    func errorOccured(_ error: Error) {
+        print("vc error")
+    }
+    
+    
 }

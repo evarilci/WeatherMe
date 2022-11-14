@@ -18,6 +18,7 @@
 		E55BF047292049CF005CA6BB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BF046292049CF005CA6BB /* MainView.swift */; };
 		E55BF049292049F7005CA6BB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BF048292049F7005CA6BB /* MainViewModel.swift */; };
 		E55BF04C29217030005CA6BB /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55BF04B29217030005CA6BB /* TabBarViewController.swift */; };
+		E58062332922FCFD0029C1F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E58062322922FCFD0029C1F4 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E58062332922FCFD0029C1F4 /* Kingfisher in Frameworks */,
 				E55BF039292044AD005CA6BB /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +205,7 @@
 			name = WeatherMe;
 			packageProductDependencies = (
 				E55BF038292044AD005CA6BB /* Moya */,
+				E58062322922FCFD0029C1F4 /* Kingfisher */,
 			);
 			productName = WeatherMe;
 			productReference = E52AE09F2920297200AA7361 /* WeatherMe.app */;
@@ -234,6 +237,7 @@
 			mainGroup = E52AE0962920297200AA7361;
 			packageReferences = (
 				E55BF037292044AD005CA6BB /* XCRemoteSwiftPackageReference "Moya" */,
+				E58062312922FCFD0029C1F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E52AE0A02920297200AA7361 /* Products */;
 			projectDirPath = "";
@@ -336,7 +340,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -390,7 +394,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -493,6 +497,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		E58062312922FCFD0029C1F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -500,6 +512,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E55BF037292044AD005CA6BB /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		E58062322922FCFD0029C1F4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E58062312922FCFD0029C1F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

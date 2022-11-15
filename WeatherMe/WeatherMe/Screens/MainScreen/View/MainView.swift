@@ -23,7 +23,8 @@ final class MainView: UIView {
     
     var degree: Double? {
         didSet {
-            degreeLabel.text = NSString(format: "\(degree!.formatted())%@" as NSString, "\u{00B0}") as String
+            guard let pretty = degree?.clean else {return}
+            degreeLabel.text = NSString(format: "\(pretty)%@" as NSString, "\u{00B0}") as String
         }
     }
     
@@ -41,19 +42,23 @@ final class MainView: UIView {
     
     var min : Double? {
         didSet {
-            minLabel.text = NSString(format: "min: \(min!.formatted())%@" as NSString, "\u{00B0}") as String
+            guard let pretty = min?.clean else {return}
+            minLabel.text = NSString(format: "min: \(pretty)%@" as NSString, "\u{00B0}") as String
         }
     }
     
     var max : Double? {
         didSet {
-            maxLabel.text =  NSString(format: "max: \(max!.formatted())%@" as NSString, "\u{00B0}") as String
+            guard let pretty = max?.clean else {return}
+            //var pretty = max!.formatted(FloatingPointFormatStyle())
+            maxLabel.text =  NSString(format: "max: \(pretty)%@" as NSString, "\u{00B0}") as String
         }
     }
     
     var night : Double? {
         didSet {
-            nightLabel.text = NSString(format: "night: \(night!.formatted())%@" as NSString, "\u{00B0}") as String
+            guard let pretty = night?.clean else {return}
+            nightLabel.text = NSString(format: "night: \(pretty)%@" as NSString, "\u{00B0}") as String
         }
     }
     
@@ -65,10 +70,6 @@ final class MainView: UIView {
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
-    
-    
-    
     private let cityTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -79,24 +80,21 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     private let degreeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 60, weight: .ultraLight)
+        label.font = UIFont.systemFont(ofSize: 75, weight: .ultraLight)
         label.sizeToFit()
         label.textColor = UIColor.systemIndigo
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     let iconView: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -106,7 +104,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -116,7 +113,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     private let dayLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -126,7 +122,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     private let minLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -136,8 +131,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
     private let maxLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -147,8 +140,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
     private let nightLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -158,8 +149,6 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    
     private let humidityLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = .zero
@@ -169,6 +158,22 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    private let Rectangle:  UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray4.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let dateRectangle:  UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray4.withAlphaComponent(0.5)
+        view.layer.cornerRadius = 12
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -176,9 +181,6 @@ final class MainView: UIView {
         setupScrollView()
         setupViews()
         
-       
-        
-       
     }
     
     required init?(coder: NSCoder) {
@@ -214,6 +216,7 @@ final class MainView: UIView {
         degreeLabel.topAnchor.constraint(equalTo: cityTitleLabel.bottomAnchor, constant: 24).isActive = true
         degreeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
         
+       
         contentView.addSubview(iconView)
         iconView.topAnchor.constraint(equalTo: degreeLabel.topAnchor).isActive = true
         iconView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24).isActive = true
@@ -221,45 +224,55 @@ final class MainView: UIView {
         iconView.heightAnchor.constraint(equalTo: iconView.widthAnchor).isActive = true
         
         
-        
         contentView.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo: iconView.bottomAnchor, constant: 10).isActive = true
         descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         descriptionLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+       
         
+        contentView.addSubview(dateRectangle)
+        dateRectangle.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20).isActive = true
+        dateRectangle.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        dateRectangle.heightAnchor.constraint(equalToConstant: 86).isActive = true
+        dateRectangle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -24).isActive = true
         
-        contentView.addSubview(dateLabel)
-        dateLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24).isActive = true
-        dateLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        dateLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        dateLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        let dateStack = UIStackView(arrangedSubviews: [dateLabel,
+                                                      dayLabel])
+        dateStack.axis = .vertical
+        dateStack.spacing = 5
+        dateStack.distribution = .fillEqually
+        dateStack.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(dayLabel)
-        dayLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 4).isActive = true
-        dayLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        dayLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        dayLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        contentView.addSubview(dateStack)
+        dateStack.topAnchor.constraint(equalTo: dateRectangle.topAnchor, constant: 8).isActive = true
+        dateStack.leadingAnchor.constraint(equalTo: dateRectangle.leadingAnchor, constant: 4).isActive = true
+        dateStack.trailingAnchor.constraint(equalTo: dateRectangle.trailingAnchor, constant: -4).isActive = true
+        dateStack.bottomAnchor.constraint(equalTo: dateRectangle.bottomAnchor, constant: -8).isActive = true
+       
+        
+        contentView.addSubview(Rectangle)
+        Rectangle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -24).isActive = true
+        Rectangle.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        Rectangle.topAnchor.constraint(equalTo: dateRectangle.bottomAnchor, constant: 24).isActive = true
+        Rectangle.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         let stack = UIStackView(arrangedSubviews: [minLabel,
                                                   maxLabel,
                                                   nightLabel])
-
         stack.axis = .horizontal
-        stack.spacing = 20
-        stack.distribution = .fillEqually
+        stack.spacing = 12
+        stack.distribution = .equalSpacing
         stack.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(stack)
-        stack.topAnchor.constraint(equalTo: dayLabel.bottomAnchor,constant: 24).isActive = true
-        stack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24).isActive = true
-        stack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24).isActive = true
+        stack.topAnchor.constraint(equalTo: Rectangle.topAnchor,constant: 8).isActive = true
+        stack.leadingAnchor.constraint(equalTo: Rectangle.leadingAnchor, constant: 24).isActive = true
+        stack.trailingAnchor.constraint(equalTo: Rectangle.trailingAnchor, constant: -24).isActive = true
         stack.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         contentView.addSubview(humidityLabel)
-        humidityLabel.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 24).isActive = true
+        humidityLabel.bottomAnchor.constraint(equalTo: Rectangle.bottomAnchor, constant: -16).isActive = true
         humidityLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         humidityLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         humidityLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        
-        
     }
 }

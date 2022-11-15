@@ -33,74 +33,63 @@ protocol MainViewModelProtocol {
 
 
 final class MainViewModel: MainViewModelProtocol {
+    
+    var delegate : MainViewModelDelegate?
+    
     var humidity = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR HUMIDITY IS: \(humidity)")
         }
     }
-    
     var min = Double() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR MIN DEGREE IS: \(min)")
-        }
+      }
     }
-    
     var max = Double() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR MAX DEGREE IS: \(max)")
         }
     }
-    
     var night = Double() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR NIGHT DEGREE IS: \(night)")
         }
     }
-    
     var degree = Double() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR DEGREE IS: \(degree)")
         }
     }
-    
     var image = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR IMAGE URL IS: \(image)")
         }
     }
-    
     var description = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR DESCRIPTION IS: \(description)")
         }
     }
-    
     var date = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR DATE IS: \(date)")
         }
     }
-    
     var day = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR DAY IS: \(day)")
         }
     }
-    
-    var delegate : MainViewModelDelegate?
     var city = String() {
         didSet{
             self.delegate?.fetchSucceed()
-            print("OUR CITY IS: \(city)")
+        }
+    }
+    var forecasts = [WeatherResponse]() {
+        didSet {
+            delegate?.fetchSucceed()
+            
         }
     }
     
@@ -112,36 +101,23 @@ final class MainViewModel: MainViewModelProtocol {
             case .success(let response):
                 do {
                     let forecast =  try JSONDecoder().decode(WeatherResponse.self, from: response.data)
-                    self!.city = forecast.city ?? "şehir gelmedi"
+                    self!.city = forecast.city ?? "-"
                     self!.degree = forecast.result![0].degreeDouble
-                    self!.image = forecast.result![0].icon ?? "icon url gelmedi"
-                    self!.description = forecast.result![0].description ?? "description gelmedi"
-                    self!.date = forecast.result![0].date ?? "date gelmedi"
-                    self!.day = forecast.result![0].day ?? "day gelmedi"
+                    self!.image = forecast.result![0].icon ?? "-"
+                    self!.description = forecast.result![0].description ?? "-"
+                    self!.date = forecast.result![0].date ?? "-"
+                    self!.day = forecast.result![0].day ?? "-"
                     self!.night = forecast.result![0].nightDouble
                     self!.min = forecast.result![0].minDouble
                     self!.max = forecast.result![0].maxDouble
-                    self!.humidity = forecast.result![0].humidity ?? "nemlenemedik"
+                    self!.humidity = forecast.result![0].humidity ?? "-"
                     self!.forecasts.append(forecast)
                     self!.delegate?.fetchSucceed()
                 } catch  {
                     self!.delegate?.errorOccured(error)
-                    
                 }
-                
                 self!.delegate?.fetchSucceed()
-                
             }
         }
     }
-    
-    var forecasts = [WeatherResponse]() {
-        didSet {
-            delegate?.fetchSucceed()
-            
-        }
-    }
-    
-    
-    
 }

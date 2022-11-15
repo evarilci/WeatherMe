@@ -40,6 +40,4 @@ extension MainViewController: MainViewModelDelegate {
     func errorOccured(_ error: Error) {
         print("vc error")
     }
-    
-    
 }

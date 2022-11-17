@@ -68,7 +68,7 @@ extension Result {
     var iconURL: URL {
         guard let icon = icon,
               let iconURL = URL(string: icon) else {
-                let image = "https://www.computerhope.com/jargon/b/black.jpg",
+                let image = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png",
                     iconUrl = URL(string: image)
                 return iconUrl!
             }

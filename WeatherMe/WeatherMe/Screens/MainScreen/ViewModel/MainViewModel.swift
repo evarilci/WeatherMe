@@ -17,86 +17,47 @@ protocol MainViewModelDelegate {
 protocol MainViewModelProtocol {
     var delegate: MainViewModelDelegate? { get set }
     func fetchWeather(_ city: String, _ lang: String)
-    var forecasts : [WeatherResponse] { get set }
-    var city : String { get set}
-    
-    func setDayFor(_ day: Int) -> String
-    func setDateFor(_ day: Int) -> String
-    func setDegreeFor(_ day: Int) -> Double
-    func setNightFor(_ day: Int) -> Double
-    func setMinFor(_ day: Int) -> Double
-    func setMaxFor(_ day: Int) -> Double
-    func setHumidityFor(_ day: Int) -> String
-    func setDescriptionFor(_ day: Int) -> String
-    func setImageFor(_ day: Int) -> URL
-    
 }
 
 final class MainViewModel: MainViewModelProtocol {
-   
-    var result = [Result]() {
-        didSet {
-            
-            self.delegate?.fetchSucceed()
-        }
-    }
-    
     var delegate : MainViewModelDelegate?
     
-    var city = String() {
-        didSet{
-            self.delegate?.fetchSucceed()
-        }
-    }
-    var forecasts = [WeatherResponse]() {
-        didSet {
-            self.result = forecasts[0].result!
-            delegate?.fetchSucceed()
-        }
-    }
+    var degrees = [Double]()
+    var dates = [String]()
+    var humidities = [String]()
+    var days = [String]()
+    var descriptions = [String]()
+    var mins = [Double]()
+    var maxs = [Double]()
+    var nights = [Double]()
+    var icons = [URL]()
+    var city = String()
+    
     func fetchWeather(_ city: String, _ lang: String) {
-        provider.request(.fetchWeather(lang: lang, city: city)) {[weak self] result in
+        provider.request(.fetchWeather(lang: lang, city: city)) { [weak self] result in
             switch result {
             case .failure(let error):
-                self?.delegate?.errorOccured(error)
+                self!.delegate?.errorOccured(error)
             case .success(let response):
                 do {
                     let forecast =  try JSONDecoder().decode(WeatherResponse.self, from: response.data)
-                      self!.city = forecast.city ?? "-"
-                    self!.forecasts.append(forecast)
+                    self!.city = forecast.city ?? "-"
+                    for degree in forecast.result! {
+                        self!.degrees.append(degree.degreeDouble)
+                        self!.dates.append(degree.date!)
+                        self!.days.append(degree.day!)
+                        self!.mins.append(degree.minDouble)
+                        self!.maxs.append(degree.maxDouble)
+                        self!.nights.append(degree.nightDouble)
+                        self!.icons.append(degree.iconURL)
+                        self!.humidities.append(degree.humidity!)
+                        self!.descriptions.append(degree.description!)
+                    }
                     self!.delegate?.fetchSucceed()
                 } catch  {
                     self!.delegate?.errorOccured(error)
                 }
-                self!.delegate?.fetchSucceed()
             }
         }
-    }
-    func setDayFor(_ day: Int) -> String {
-        result[day].day!
-    }
-    func setDateFor(_ day: Int) -> String {
-        result[day].date!
-    }
-    func setDegreeFor(_ day: Int) -> Double {
-        result[day].degreeDouble
-    }
-    func setNightFor(_ day: Int) -> Double {
-        result[day].nightDouble
-    }
-    func setMinFor(_ day: Int) -> Double {
-        result[day].minDouble
-    }
-    func setMaxFor(_ day: Int) -> Double {
-        result[day].maxDouble
-    }
-    func setHumidityFor(_ day: Int) -> String {
-        result[day].humidity!
-    }
-    func setDescriptionFor(_ day: Int) -> String {
-        result[day].description!
-    }
-    func setImageFor(_ day: Int) -> URL {
-        result[day].iconURL
     }
 }

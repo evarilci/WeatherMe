@@ -6,108 +6,120 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MainView: UIView {
     
     
     // MARK:  PROPERTIES
+    //one time use properties
     var city : String? {
         didSet {
             cityTitleLabel.text = city
         }
     }
-    var humidity : String? {
+    var humidities : [String]? {
         didSet {
-            humidityLabel.text = "humidity: \(humidity ?? "-")"
+            if !humidities!.isEmpty {
+                humidityLabel.text = "humidity: \(humidities![0])"
+            }
         }
     }
-    var descript : String? {
+    var descripts : [String]? {
         didSet {
-            descriptionLabel.text = descript
-        }
-    }
-    
-    // - degree properties
-    var degree: Double? {
-        didSet {
-            guard let pretty = degree?.clean else {return}
-            degreeLabel.text = NSString(format: "\(pretty)%@" as NSString, "\u{00B0}") as String
-        }
-    }
-    var degree1: Double? {
-        didSet {
-            guard let pretty = degree1?.clean else {return}
-            degreeLabel1.text = NSString(format: "\(pretty)%@" as NSString, "\u{00B0}") as String
+            if !descripts!.isEmpty {
+                descriptionLabel.text = descripts![0]
+            }
+            
         }
     }
     
-    // - date properties
-    var date : String? {
+    // - icon property
+    var icons : [URL]? {
         didSet {
-            dateLabel.text = date
-        }
-    }
-    var date1 : String? {
-        didSet {
-            dateLabel1.text = date1
-        }
-    }
-    
-    // - day properties
-    var day : String? {
-        didSet {
-            dayLabel.text = day
-        }
-    }
-    var day1 : String? {
-        didSet {
-            dayLabel1.text = day1
+            if !icons!.isEmpty {
+                iconView.kf.setImage(with: icons![0])
+                iconView1.kf.setImage(with: icons![1])
+            }
         }
     }
     
-    // - min properties
-    var min : Double? {
+    // - degree property
+    var degrees: [Double]? {
         didSet {
-            guard let pretty = min?.clean else {return}
-            minLabel.text = NSString(format: "min: \(pretty)%@" as NSString, "\u{00B0}") as String
-        }
-    }
-    var min1 : Double? {
-        didSet {
-            guard let pretty = min1?.clean else {return}
-            minLabel1.text = NSString(format: "min: \(pretty)%@" as NSString, "\u{00B0}") as String
+            if !degrees!.isEmpty {
+                degreeLabel.text = NSString(format: "\(degrees![0].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel1.text = NSString(format: "\(degrees![1].clean)%@" as NSString, "\u{00B0}") as String
+            }
         }
     }
     
-    // - max properties
-    var max : Double? {
+    // - date property
+    var dates : [String]? {
         didSet {
-            guard let pretty = max?.clean else {return}
-            maxLabel.text =  NSString(format: "max: \(pretty)%@" as NSString, "\u{00B0}") as String
-        }
-    }
-    var max1 : Double? {
-        didSet {
-            guard let pretty = max1?.clean else {return}
-            maxLabel1.text =  NSString(format: "max: \(pretty)%@" as NSString, "\u{00B0}") as String
+            if !dates!.isEmpty {
+                dateLabel.text = dates![0]
+                dateLabel1.text = dates![1]
+            }
+            
         }
     }
     
-    // - night properties
-    var night : Double? {
+    // - day property
+    var days : [String]? {
         didSet {
-            guard let pretty = night?.clean else {return}
-            nightLabel.text = NSString(format: "night: \(pretty)%@" as NSString, "\u{00B0}") as String
-        }
-    }
-    var night1 : Double? {
-        didSet {
-            guard let pretty = night1?.clean else {return}
-            nightLabel1.text = NSString(format: "night: \(pretty)%@" as NSString, "\u{00B0}") as String
+            if !days!.isEmpty {
+                dayLabel.text = days![0]
+                dayLabel1.text = days![1]
+            }
         }
     }
     
-    // - humidity properties
+    // - min property
+    var mins : [Double]? {
+        didSet {
+            if !mins!.isEmpty {
+                minLabel.text = NSString(format: "min: \(mins![0].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel1.text = NSString(format: "min: \(mins![1].clean)%@" as NSString, "\u{00B0}") as String
+            }
+        }
+    }
+    
+    // - max property
+    var maxs : [Double]? {
+        didSet {
+            if !maxs!.isEmpty {
+                maxLabel.text  =  NSString(format: "max: \(maxs![0].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel1.text =  NSString(format: "max: \(maxs![1].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel2.text =  NSString(format: "max: \(maxs![2].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel3.text =  NSString(format: "max: \(maxs![3].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel4.text =  NSString(format: "max: \(maxs![4].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel5.text =  NSString(format: "max: \(maxs![5].clean)%@" as NSString, "\u{00B0}") as String
+                maxLabel6.text =  NSString(format: "max: \(maxs![6].clean)%@" as NSString, "\u{00B0}") as String
+                
+                
+            }
+        }
+    }
+    
+    // - night property
+    var nights : [Double]? {
+        didSet {
+            if !nights!.isEmpty {
+                nightLabel.text  = NSString(format: "night: \(nights![0].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel1.text = NSString(format: "night: \(nights![1].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel2.text = NSString(format: "night: \(nights![2].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel3.text = NSString(format: "night: \(nights![3].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel4.text = NSString(format: "night: \(nights![4].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel5.text = NSString(format: "night: \(nights![5].clean)%@" as NSString, "\u{00B0}") as String
+                nightLabel6.text = NSString(format: "night: \(nights![6].clean)%@" as NSString, "\u{00B0}") as String
+                
+            }
+            
+            
+        }
+    }
+    
     
     // MARK: CONTENTVIEW
     private let scrollView = UIScrollView()
@@ -217,37 +229,37 @@ final class MainView: UIView {
     }()
     
     // ICON VIEWS
-    let iconView: UIImageView = {
+    private let iconView: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView1: UIImageView = {
+    private let iconView1: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView2: UIImageView = {
+    private let iconView2: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView3: UIImageView = {
+    private let iconView3: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView4: UIImageView = {
+    private let iconView4: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView5: UIImageView = {
+    private let iconView5: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
-    let iconView6: UIImageView = {
+    private let iconView6: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
@@ -266,7 +278,52 @@ final class MainView: UIView {
     private let dateLabel1: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .center
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dateLabel2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dateLabel3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dateLabel4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dateLabel5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dateLabe6: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -284,6 +341,51 @@ final class MainView: UIView {
         return label
     }()
     private let dayLabel1: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dayLabel2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dayLabel3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dayLabel4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dayLabel5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let dayLabel6: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -312,6 +414,51 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    private let minLabel2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let minLabel3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let minLabel4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let minLabel5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let minLabel6: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     // MAX LABELS
     private let maxLabel: UILabel = {
@@ -332,6 +479,51 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    private let maxLabel2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maxLabel3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maxLabel4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maxLabel5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let maxLabel6: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     // NIGHT LABELS
     private let nightLabel: UILabel = {
@@ -344,6 +536,51 @@ final class MainView: UIView {
         return label
     }()
     private let nightLabel1: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nightLabel2: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nightLabel3: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nightLabel4: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nightLabel5: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 15, weight: .ultraLight)
+        label.sizeToFit()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let nightLabel6: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
@@ -478,7 +715,7 @@ final class MainView: UIView {
         descriptionLabel.topAnchor.constraint(equalTo: iconView.bottomAnchor, constant: 10).isActive = true
         descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         descriptionLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-       
+        
         
         // DATE RECTANGLE
         contentView.addSubview(dateRectangle)
@@ -488,7 +725,7 @@ final class MainView: UIView {
         dateRectangle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -24).isActive = true
         
         let dateStack = UIStackView(arrangedSubviews: [dateLabel,
-                                                      dayLabel])
+                                                       dayLabel])
         dateStack.axis = .vertical
         dateStack.spacing = 5
         dateStack.distribution = .fillEqually
@@ -499,7 +736,7 @@ final class MainView: UIView {
         dateStack.leadingAnchor.constraint(equalTo: dateRectangle.leadingAnchor, constant: 4).isActive = true
         dateStack.trailingAnchor.constraint(equalTo: dateRectangle.trailingAnchor, constant: -4).isActive = true
         dateStack.bottomAnchor.constraint(equalTo: dateRectangle.bottomAnchor, constant: -8).isActive = true
-       
+        
         
         // DEGREE RECTANGLE
         contentView.addSubview(Rectangle)
@@ -509,8 +746,8 @@ final class MainView: UIView {
         Rectangle.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         let stack = UIStackView(arrangedSubviews: [minLabel,
-                                                  maxLabel,
-                                                  nightLabel])
+                                                   maxLabel,
+                                                   nightLabel])
         stack.axis = .horizontal
         stack.spacing = 12
         stack.distribution = .equalSpacing
@@ -524,7 +761,7 @@ final class MainView: UIView {
         contentView.addSubview(humidityLabel)
         humidityLabel.bottomAnchor.constraint(equalTo: Rectangle.bottomAnchor, constant: -16).isActive = true
         humidityLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        humidityLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        humidityLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         humidityLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         
         //  DAY1 RECTANGLE
@@ -566,16 +803,14 @@ final class MainView: UIView {
         contentView.addSubview(maxLabel1)
         maxLabel1.leadingAnchor.constraint(equalTo: minLabel1.trailingAnchor, constant: 4).isActive = true
         maxLabel1.topAnchor.constraint(equalTo: degreeLabel1.bottomAnchor, constant: 10).isActive = true
-        maxLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/3).isActive = true
+        maxLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
         maxLabel1.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
         contentView.addSubview(nightLabel1)
         nightLabel1.leadingAnchor.constraint(equalTo: day1Rec.leadingAnchor, constant: 4).isActive = true
         nightLabel1.topAnchor.constraint(equalTo: minLabel1.bottomAnchor, constant: 10).isActive = true
-        nightLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/3, constant: 5).isActive = true
-        nightLabel1.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        
-        
+        nightLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel1.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         // DAY2 RECTANGLE
         contentView.addSubview(day2Rec)

@@ -9,42 +9,37 @@ import UIKit
 import Kingfisher
 
 final class MainViewController: UIViewController {
-
+    
+    
     let mainView = MainView()
     let viewModel = MainViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view = mainView
-        viewModel.fetchWeather("gebze", "tr")
-            fetchSucceed()
+        viewModel.fetchWeather("Gebze", "tr")
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchSucceed()
+        self.view.layoutIfNeeded()
+    }
 }
 
 extension MainViewController: MainViewModelDelegate {
     func fetchSucceed() {
-        mainView.city = viewModel.city
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.mainView.day = self.viewModel.setDayFor(0)
-            self.mainView.iconView.kf.setImage(with: self.viewModel.setImageFor(0))
-            self.mainView.degree = self.viewModel.setDegreeFor(0)
-            self.mainView.min = self.viewModel.setMinFor(0)
-            self.mainView.max = self.viewModel.setMaxFor(0)
-            self.mainView.night = self.viewModel.setNightFor(0)
-            self.mainView.humidity = self.viewModel.setHumidityFor(0)
-            self.mainView.descript = self.viewModel.setDescriptionFor(0)
-            self.mainView.date = self.viewModel.setDateFor(0)
-            self.mainView.degree1 = self.viewModel.setDegreeFor(1)
-            self.mainView.iconView1.kf.setImage(with: self.viewModel.setImageFor(1))
-            self.mainView.day1 = self.viewModel.setDayFor(1)
-            self.mainView.date1 = self.viewModel.setDateFor(1)
-            self.mainView.min1 = self.viewModel.setMinFor(1)
-            self.mainView.max1 = self.viewModel.setMaxFor(1)
-            self.mainView.night1 = self.viewModel.setNightFor(1)
-        })
+        self.mainView.city = self.viewModel.city
+        self.mainView.degrees = self.viewModel.degrees
+        self.mainView.days = self.viewModel.days
+        self.mainView.descripts = self.viewModel.descriptions
+        self.mainView.dates = self.viewModel.dates
+        self.mainView.mins = self.viewModel.mins
+        self.mainView.maxs = self.viewModel.maxs
+        self.mainView.nights = self.viewModel.nights
+        self.mainView.humidities = self.viewModel.humidities
+        self.mainView.icons = self.viewModel.icons
     }
     
     func errorOccured(_ error: Error) {

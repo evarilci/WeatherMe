@@ -143,6 +143,7 @@ final class MainView: UIView {
     // MARK: CONTENTVIEW
     private let scrollView = UIScrollView()
     private let contentView = UIView()
+    var refreshControl = UIRefreshControl()
     
     
     // MARK: - UI COMPONENTS
@@ -675,12 +676,14 @@ final class MainView: UIView {
         return view
     }()
     
+   
     // MARK: - INIT
     init() {
         super.init(frame: .zero)
         
         setupScrollView()
         setupViews()
+        setRefresh()
         
     }
     
@@ -688,7 +691,15 @@ final class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    // refresh control setup
+    func setRefresh() {
+                refreshControl.tintColor = UIColor.systemIndigo
+                refreshControl.attributedTitle = NSAttributedString(string: "refresh")
+                self.scrollView.isScrollEnabled = true
+                self.scrollView.alwaysBounceVertical = true
+                scrollView.addSubview(refreshControl)
+    }
+
     // MARK: - CONTENTVIEW SETUP
     func setupScrollView(){
         scrollView.translatesAutoresizingMaskIntoConstraints = false

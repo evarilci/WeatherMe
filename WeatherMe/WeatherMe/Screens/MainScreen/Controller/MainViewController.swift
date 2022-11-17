@@ -10,22 +10,34 @@ import Kingfisher
 
 final class MainViewController: UIViewController {
     
-    
     let mainView = MainView()
     let viewModel = MainViewModel()
+   
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         view = mainView
         viewModel.fetchWeather("Gebze", "tr")
+        mainView.refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         fetchSucceed()
         self.view.layoutIfNeeded()
+        
     }
+    
+    @objc func refresh(sender:AnyObject) {
+            // Code to refresh table view
+            viewModel.fetchWeather("Gebze", "tr")
+            fetchSucceed()
+            mainView.refreshControl.endRefreshing()
+        }
 }
 
 extension MainViewController: MainViewModelDelegate {

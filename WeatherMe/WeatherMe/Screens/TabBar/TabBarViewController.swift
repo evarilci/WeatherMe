@@ -18,28 +18,28 @@ final class TabBarViewController: UITabBarController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-        navigationItem.largeTitleDisplayMode = .never
     }
     
     // Create all of the tabs and icons of the tabs
     func setupViewControllers(){
         viewControllers = [
             createNavigationController(for: MainViewController(),
-                                       title: NSLocalizedString("", comment: ""),
-                                       image: UIImage(systemName:"sun.max")!)
+                                       title: NSLocalizedString("Forecast", comment: ""),
+                                       tabTitle: "Forecast",
+                                       image: UIImage(systemName:"cloud")!)
             
         ]
     }
     
     fileprivate func createNavigationController(for rootViewController: UIViewController,
                                                 title: String,
+                                                tabTitle: String,
                                                 image: UIImage) -> UIViewController{
         // add navigation controller to each tab
         let navigationController = UINavigationController(rootViewController: rootViewController)
-        navigationController.tabBarItem.title = title
+        navigationController.tabBarItem.title = tabTitle
         navigationController.tabBarItem.image = image
-        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.navigationBar.prefersLargeTitles = false
         rootViewController.navigationItem.title = title
         return navigationController
     }

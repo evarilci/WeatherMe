@@ -40,6 +40,11 @@ final class MainView: UIView {
             if !icons!.isEmpty {
                 iconView.kf.setImage(with: icons![0])
                 iconView1.kf.setImage(with: icons![1])
+                iconView2.kf.setImage(with: icons![2])
+                iconView3.kf.setImage(with: icons![3])
+                iconView4.kf.setImage(with: icons![4])
+                iconView5.kf.setImage(with: icons![5])
+                iconView6.kf.setImage(with: icons![6])
             }
         }
     }
@@ -50,6 +55,11 @@ final class MainView: UIView {
             if !degrees!.isEmpty {
                 degreeLabel.text = NSString(format: "\(degrees![0].clean)%@" as NSString, "\u{00B0}") as String
                 degreeLabel1.text = NSString(format: "\(degrees![1].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel2.text = NSString(format: "\(degrees![2].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel3.text = NSString(format: "\(degrees![3].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel4.text = NSString(format: "\(degrees![4].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel5.text = NSString(format: "\(degrees![5].clean)%@" as NSString, "\u{00B0}") as String
+                degreeLabel6.text = NSString(format: "\(degrees![6].clean)%@" as NSString, "\u{00B0}") as String
             }
         }
     }
@@ -60,8 +70,12 @@ final class MainView: UIView {
             if !dates!.isEmpty {
                 dateLabel.text = dates![0]
                 dateLabel1.text = dates![1]
+                dateLabel2.text = dates![2]
+                dateLabel3.text = dates![3]
+                dateLabel4.text = dates![4]
+                dateLabel5.text = dates![5]
+                dateLabel6.text = dates![6]
             }
-            
         }
     }
     
@@ -71,6 +85,11 @@ final class MainView: UIView {
             if !days!.isEmpty {
                 dayLabel.text = days![0]
                 dayLabel1.text = days![1]
+                dayLabel2.text = days![2]
+                dayLabel3.text = days![3]
+                dayLabel4.text = days![4]
+                dayLabel5.text = days![5]
+                dayLabel6.text = days![6]
             }
         }
     }
@@ -81,6 +100,11 @@ final class MainView: UIView {
             if !mins!.isEmpty {
                 minLabel.text = NSString(format: "min: \(mins![0].clean)%@" as NSString, "\u{00B0}") as String
                 minLabel1.text = NSString(format: "min: \(mins![1].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel2.text = NSString(format: "min: \(mins![2].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel3.text = NSString(format: "min: \(mins![3].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel4.text = NSString(format: "min: \(mins![4].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel5.text = NSString(format: "min: \(mins![5].clean)%@" as NSString, "\u{00B0}") as String
+                minLabel6.text = NSString(format: "min: \(mins![6].clean)%@" as NSString, "\u{00B0}") as String
             }
         }
     }
@@ -96,8 +120,6 @@ final class MainView: UIView {
                 maxLabel4.text =  NSString(format: "max: \(maxs![4].clean)%@" as NSString, "\u{00B0}") as String
                 maxLabel5.text =  NSString(format: "max: \(maxs![5].clean)%@" as NSString, "\u{00B0}") as String
                 maxLabel6.text =  NSString(format: "max: \(maxs![6].clean)%@" as NSString, "\u{00B0}") as String
-                
-                
             }
         }
     }
@@ -113,10 +135,7 @@ final class MainView: UIView {
                 nightLabel4.text = NSString(format: "night: \(nights![4].clean)%@" as NSString, "\u{00B0}") as String
                 nightLabel5.text = NSString(format: "night: \(nights![5].clean)%@" as NSString, "\u{00B0}") as String
                 nightLabel6.text = NSString(format: "night: \(nights![6].clean)%@" as NSString, "\u{00B0}") as String
-                
             }
-            
-            
         }
     }
     
@@ -320,7 +339,7 @@ final class MainView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    private let dateLabe6: UILabel = {
+    private let dateLabel6: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -712,10 +731,9 @@ final class MainView: UIView {
         
         // DESCRIPTON LABEL
         contentView.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo: iconView.bottomAnchor, constant: 10).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: iconView.bottomAnchor, constant: 20).isActive = true
         descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         descriptionLabel.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        
         
         // DATE RECTANGLE
         contentView.addSubview(dateRectangle)
@@ -736,7 +754,6 @@ final class MainView: UIView {
         dateStack.leadingAnchor.constraint(equalTo: dateRectangle.leadingAnchor, constant: 4).isActive = true
         dateStack.trailingAnchor.constraint(equalTo: dateRectangle.trailingAnchor, constant: -4).isActive = true
         dateStack.bottomAnchor.constraint(equalTo: dateRectangle.bottomAnchor, constant: -8).isActive = true
-        
         
         // DEGREE RECTANGLE
         contentView.addSubview(Rectangle)
@@ -785,19 +802,19 @@ final class MainView: UIView {
         contentView.addSubview(dayLabel1)
         dayLabel1.leadingAnchor.constraint(equalTo: degreeLabel1.trailingAnchor, constant: 4).isActive = true
         dayLabel1.topAnchor.constraint(equalTo: day1Rec.topAnchor, constant: 8).isActive = true
-        dayLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/2).isActive = true
+        dayLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
         dayLabel1.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         contentView.addSubview(dateLabel1)
         dateLabel1.leadingAnchor.constraint(equalTo: degreeLabel1.trailingAnchor, constant: 4).isActive = true
         dateLabel1.topAnchor.constraint(equalTo: dayLabel1.bottomAnchor, constant: 6).isActive = true
-        dateLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/2).isActive = true
+        dateLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
         dateLabel1.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         contentView.addSubview(minLabel1)
-        minLabel1.leadingAnchor.constraint(equalTo: day1Rec.leadingAnchor, constant: 4).isActive = true
+        minLabel1.leadingAnchor.constraint(equalTo: day1Rec.leadingAnchor, constant: 12).isActive = true
         minLabel1.topAnchor.constraint(equalTo: degreeLabel1.bottomAnchor, constant: 10).isActive = true
-        minLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/3).isActive = true
+        minLabel1.widthAnchor.constraint(equalTo: day1Rec.widthAnchor, multiplier: 1/2).isActive = true
         minLabel1.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
         contentView.addSubview(maxLabel1)
@@ -819,6 +836,48 @@ final class MainView: UIView {
         day2Rec.topAnchor.constraint(equalTo: Rectangle.bottomAnchor, constant: 24).isActive = true
         day2Rec.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         
+        contentView.addSubview(degreeLabel2)
+        degreeLabel2.leadingAnchor.constraint(equalTo: day2Rec.leadingAnchor, constant: 4).isActive = true
+        degreeLabel2.topAnchor.constraint(equalTo: day2Rec.topAnchor, constant: 4).isActive = true
+        degreeLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1 / 2, constant: -24).isActive = true
+        
+        contentView.addSubview(iconView2)
+        iconView2.trailingAnchor.constraint(equalTo: day2Rec.trailingAnchor, constant: -4).isActive = true
+        iconView2.bottomAnchor.constraint(equalTo: day2Rec.bottomAnchor, constant: -4).isActive = true
+        iconView2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        iconView2.heightAnchor.constraint(equalTo: iconView2.widthAnchor).isActive = true
+        
+        contentView.addSubview(dayLabel2)
+        dayLabel2.leadingAnchor.constraint(equalTo: degreeLabel2.trailingAnchor, constant: 4).isActive = true
+        dayLabel2.topAnchor.constraint(equalTo: day2Rec.topAnchor, constant: 8).isActive = true
+        dayLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dayLabel2.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(dateLabel2)
+        dateLabel2.leadingAnchor.constraint(equalTo: degreeLabel2.trailingAnchor, constant: 4).isActive = true
+        dateLabel2.topAnchor.constraint(equalTo: dayLabel2.bottomAnchor, constant: 6).isActive = true
+        dateLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dateLabel2.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(minLabel2)
+        minLabel2.leadingAnchor.constraint(equalTo: day2Rec.leadingAnchor, constant: 12).isActive = true
+        minLabel2.topAnchor.constraint(equalTo: degreeLabel2.bottomAnchor, constant: 10).isActive = true
+        minLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/2).isActive = true
+        minLabel2.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        
+        contentView.addSubview(maxLabel2)
+        maxLabel2.leadingAnchor.constraint(equalTo: minLabel2.trailingAnchor, constant: 4).isActive = true
+        maxLabel2.topAnchor.constraint(equalTo: degreeLabel2.bottomAnchor, constant: 10).isActive = true
+        maxLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
+        maxLabel2.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(nightLabel2)
+        nightLabel2.leadingAnchor.constraint(equalTo: day2Rec.leadingAnchor, constant: 4).isActive = true
+        nightLabel2.topAnchor.constraint(equalTo: minLabel2.bottomAnchor, constant: 10).isActive = true
+        nightLabel2.widthAnchor.constraint(equalTo: day2Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel2.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
         // DAY3 RECTANGLE
         contentView.addSubview(day3Rec)
         day3Rec.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2,  constant: -24).isActive = true
@@ -826,12 +885,94 @@ final class MainView: UIView {
         day3Rec.topAnchor.constraint(equalTo: day1Rec.bottomAnchor, constant: 24).isActive = true
         day3Rec.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         
+        contentView.addSubview(degreeLabel3)
+        degreeLabel3.leadingAnchor.constraint(equalTo: day3Rec.leadingAnchor, constant: 4).isActive = true
+        degreeLabel3.topAnchor.constraint(equalTo: day3Rec.topAnchor, constant: 4).isActive = true
+        degreeLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1 / 2, constant: -24).isActive = true
+        
+        contentView.addSubview(iconView3)
+        iconView3.trailingAnchor.constraint(equalTo: day3Rec.trailingAnchor, constant: -4).isActive = true
+        iconView3.bottomAnchor.constraint(equalTo: day3Rec.bottomAnchor, constant: -4).isActive = true
+        iconView3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        iconView3.heightAnchor.constraint(equalTo: iconView3.widthAnchor).isActive = true
+        
+        contentView.addSubview(dayLabel3)
+        dayLabel3.leadingAnchor.constraint(equalTo: degreeLabel3.trailingAnchor, constant: 4).isActive = true
+        dayLabel3.topAnchor.constraint(equalTo: day3Rec.topAnchor, constant: 8).isActive = true
+        dayLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dayLabel3.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(dateLabel3)
+        dateLabel3.leadingAnchor.constraint(equalTo: degreeLabel3.trailingAnchor, constant: 4).isActive = true
+        dateLabel3.topAnchor.constraint(equalTo: dayLabel3.bottomAnchor, constant: 6).isActive = true
+        dateLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dateLabel3.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(minLabel3)
+        minLabel3.leadingAnchor.constraint(equalTo: day3Rec.leadingAnchor, constant: 12).isActive = true
+        minLabel3.topAnchor.constraint(equalTo: degreeLabel3.bottomAnchor, constant: 10).isActive = true
+        minLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/2).isActive = true
+        minLabel3.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(maxLabel3)
+        maxLabel3.leadingAnchor.constraint(equalTo: minLabel3.trailingAnchor, constant: 4).isActive = true
+        maxLabel3.topAnchor.constraint(equalTo: degreeLabel3.bottomAnchor, constant: 10).isActive = true
+        maxLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
+        maxLabel3.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(nightLabel3)
+        nightLabel3.leadingAnchor.constraint(equalTo: day3Rec.leadingAnchor, constant: 4).isActive = true
+        nightLabel3.topAnchor.constraint(equalTo: minLabel3.bottomAnchor, constant: 10).isActive = true
+        nightLabel3.widthAnchor.constraint(equalTo: day3Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel3.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
         // DAY4 RECTANGLE
         contentView.addSubview(day4Rec)
         day4Rec.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2,  constant: -24).isActive = true
         day4Rec.heightAnchor.constraint(equalToConstant: 200).isActive = true
         day4Rec.topAnchor.constraint(equalTo: day2Rec.bottomAnchor, constant: 24).isActive = true
         day4Rec.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        
+        contentView.addSubview(degreeLabel4)
+        degreeLabel4.leadingAnchor.constraint(equalTo: day4Rec.leadingAnchor, constant: 4).isActive = true
+        degreeLabel4.topAnchor.constraint(equalTo: day4Rec.topAnchor, constant: 4).isActive = true
+        degreeLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1 / 2, constant: -24).isActive = true
+        
+        contentView.addSubview(iconView4)
+        iconView4.trailingAnchor.constraint(equalTo: day4Rec.trailingAnchor, constant: -4).isActive = true
+        iconView4.bottomAnchor.constraint(equalTo: day4Rec.bottomAnchor, constant: -4).isActive = true
+        iconView4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        iconView4.heightAnchor.constraint(equalTo: iconView4.widthAnchor).isActive = true
+        
+        contentView.addSubview(dayLabel4)
+        dayLabel4.leadingAnchor.constraint(equalTo: degreeLabel4.trailingAnchor, constant: 4).isActive = true
+        dayLabel4.topAnchor.constraint(equalTo: day4Rec.topAnchor, constant: 8).isActive = true
+        dayLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dayLabel4.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(dateLabel4)
+        dateLabel4.leadingAnchor.constraint(equalTo: degreeLabel4.trailingAnchor, constant: 4).isActive = true
+        dateLabel4.topAnchor.constraint(equalTo: dayLabel4.bottomAnchor, constant: 6).isActive = true
+        dateLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dateLabel4.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(minLabel4)
+        minLabel4.leadingAnchor.constraint(equalTo: day4Rec.leadingAnchor, constant: 12).isActive = true
+        minLabel4.topAnchor.constraint(equalTo: degreeLabel4.bottomAnchor, constant: 10).isActive = true
+        minLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/2).isActive = true
+        minLabel4.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(maxLabel4)
+        maxLabel4.leadingAnchor.constraint(equalTo: minLabel4.trailingAnchor, constant: 4).isActive = true
+        maxLabel4.topAnchor.constraint(equalTo: degreeLabel4.bottomAnchor, constant: 10).isActive = true
+        maxLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
+        maxLabel4.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(nightLabel4)
+        nightLabel4.leadingAnchor.constraint(equalTo: day4Rec.leadingAnchor, constant: 4).isActive = true
+        nightLabel4.topAnchor.constraint(equalTo: minLabel4.bottomAnchor, constant: 10).isActive = true
+        nightLabel4.widthAnchor.constraint(equalTo: day4Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel4.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         // DAY5 RECTANGLE
         contentView.addSubview(day5Rec)
@@ -841,6 +982,47 @@ final class MainView: UIView {
         day5Rec.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         day5Rec.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
+        contentView.addSubview(degreeLabel5)
+        degreeLabel5.leadingAnchor.constraint(equalTo: day5Rec.leadingAnchor, constant: 4).isActive = true
+        degreeLabel5.topAnchor.constraint(equalTo: day5Rec.topAnchor, constant: 4).isActive = true
+        degreeLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1 / 2, constant: -24).isActive = true
+        
+        contentView.addSubview(iconView5)
+        iconView5.trailingAnchor.constraint(equalTo: day5Rec.trailingAnchor, constant: -4).isActive = true
+        iconView5.bottomAnchor.constraint(equalTo: day5Rec.bottomAnchor, constant: -4).isActive = true
+        iconView5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        iconView5.heightAnchor.constraint(equalTo: iconView5.widthAnchor).isActive = true
+        
+        contentView.addSubview(dayLabel5)
+        dayLabel5.leadingAnchor.constraint(equalTo: degreeLabel5.trailingAnchor, constant: 4).isActive = true
+        dayLabel5.topAnchor.constraint(equalTo: day5Rec.topAnchor, constant: 8).isActive = true
+        dayLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dayLabel5.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(dateLabel5)
+        dateLabel5.leadingAnchor.constraint(equalTo: degreeLabel5.trailingAnchor, constant: 4).isActive = true
+        dateLabel5.topAnchor.constraint(equalTo: dayLabel5.bottomAnchor, constant: 6).isActive = true
+        dateLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dateLabel5.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(minLabel5)
+        minLabel5.leadingAnchor.constraint(equalTo: day5Rec.leadingAnchor, constant: 12).isActive = true
+        minLabel5.topAnchor.constraint(equalTo: degreeLabel5.bottomAnchor, constant: 10).isActive = true
+        minLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/2).isActive = true
+        minLabel5.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(maxLabel5)
+        maxLabel5.leadingAnchor.constraint(equalTo: minLabel5.trailingAnchor, constant: 4).isActive = true
+        maxLabel5.topAnchor.constraint(equalTo: degreeLabel5.bottomAnchor, constant: 10).isActive = true
+        maxLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
+        maxLabel5.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(nightLabel5)
+        nightLabel5.leadingAnchor.constraint(equalTo: day5Rec.leadingAnchor, constant: 4).isActive = true
+        nightLabel5.topAnchor.constraint(equalTo: minLabel5.bottomAnchor, constant: 10).isActive = true
+        nightLabel5.widthAnchor.constraint(equalTo: day5Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel5.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        
         // DAY6 RECTANGLE
         contentView.addSubview(day6Rec)
         day6Rec.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2,  constant: -24).isActive = true
@@ -848,6 +1030,47 @@ final class MainView: UIView {
         day6Rec.topAnchor.constraint(equalTo: day4Rec.bottomAnchor, constant: 24).isActive = true
         day6Rec.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         day6Rec.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        
+        contentView.addSubview(degreeLabel6)
+        degreeLabel6.leadingAnchor.constraint(equalTo: day6Rec.leadingAnchor, constant: 4).isActive = true
+        degreeLabel6.topAnchor.constraint(equalTo: day6Rec.topAnchor, constant: 4).isActive = true
+        degreeLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1 / 2, constant: -24).isActive = true
+        
+        contentView.addSubview(iconView6)
+        iconView6.trailingAnchor.constraint(equalTo: day6Rec.trailingAnchor, constant: -4).isActive = true
+        iconView6.bottomAnchor.constraint(equalTo: day6Rec.bottomAnchor, constant: -4).isActive = true
+        iconView6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        iconView6.heightAnchor.constraint(equalTo: iconView6.widthAnchor).isActive = true
+        
+        contentView.addSubview(dayLabel6)
+        dayLabel6.leadingAnchor.constraint(equalTo: degreeLabel6.trailingAnchor, constant: 4).isActive = true
+        dayLabel6.topAnchor.constraint(equalTo: day6Rec.topAnchor, constant: 8).isActive = true
+        dayLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dayLabel6.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(dateLabel6)
+        dateLabel6.leadingAnchor.constraint(equalTo: degreeLabel6.trailingAnchor, constant: 4).isActive = true
+        dateLabel6.topAnchor.constraint(equalTo: dayLabel6.bottomAnchor, constant: 6).isActive = true
+        dateLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/2, constant: 20).isActive = true
+        dateLabel6.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        contentView.addSubview(minLabel6)
+        minLabel6.leadingAnchor.constraint(equalTo: day6Rec.leadingAnchor, constant: 12).isActive = true
+        minLabel6.topAnchor.constraint(equalTo: degreeLabel6.bottomAnchor, constant: 10).isActive = true
+        minLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/2).isActive = true
+        minLabel6.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(maxLabel6)
+        maxLabel6.leadingAnchor.constraint(equalTo: minLabel6.trailingAnchor, constant: 4).isActive = true
+        maxLabel6.topAnchor.constraint(equalTo: degreeLabel6.bottomAnchor, constant: 10).isActive = true
+        maxLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/3, constant: 12).isActive = true
+        maxLabel6.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        contentView.addSubview(nightLabel6)
+        nightLabel6.leadingAnchor.constraint(equalTo: day6Rec.leadingAnchor, constant: 4).isActive = true
+        nightLabel6.topAnchor.constraint(equalTo: minLabel6.bottomAnchor, constant: 10).isActive = true
+        nightLabel6.widthAnchor.constraint(equalTo: day6Rec.widthAnchor, multiplier: 1/3, constant: 15).isActive = true
+        nightLabel6.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
     }
 }

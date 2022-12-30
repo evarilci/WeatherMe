@@ -6,16 +6,12 @@
 //
 
 import UIKit
-import Kingfisher
 
 final class MainViewController: UIViewController {
     
     let mainView = MainView()
     let viewModel = MainViewModel()
    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -33,7 +29,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func refresh(sender:AnyObject) {
-            // Code to refresh table view
+
             viewModel.fetchWeather("Gebze", "tr")
             fetchSucceed()
             mainView.refreshControl.endRefreshing()
